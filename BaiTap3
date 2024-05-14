@@ -6,6 +6,15 @@ class Form1(Form1Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
+    def selection_sort(self, arr):
+        n = len(arr)
+        for i in range(n - 1):
+            min_idx = i
+            for j in range(i + 1, n):
+                if arr[j] < arr[min_idx]:
+                    min_idx = j
+            arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
     def btn_sapxep_click(self, **event_args):
         """This method is called when the button is clicked"""
         # Lấy dãy số từ ô nhập liệu
@@ -13,10 +22,10 @@ class Form1(Form1Template):
         numbers = [int(x.strip()) for x in input_text.split()]
         
         # Sắp xếp dãy số
-        sorted_numbers = sorted(numbers)
+        self.selection_sort(numbers)
         
         # Hiển thị kết quả sắp xếp
-        self.txtB_KetQua.text = " ".join(str(num) for num in sorted_numbers)
+        self.txtB_KetQua.text = " ".join(str(num) for num in numbers)
 
     def txtB_Nhap_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
