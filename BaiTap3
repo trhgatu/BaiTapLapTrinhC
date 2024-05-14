@@ -1,0 +1,28 @@
+from ._anvil_designer import Form1Template
+from anvil import *
+
+class Form1(Form1Template):
+    def __init__(self, **properties):
+        # Set Form properties and Data Bindings.
+        self.init_components(**properties)
+
+    def btn_sapxep_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # Lấy dãy số từ ô nhập liệu
+        input_text = self.txtB_Nhap.text
+        numbers = [int(x.strip()) for x in input_text.split()]
+        
+        # Sắp xếp dãy số
+        sorted_numbers = sorted(numbers)
+        
+        # Hiển thị kết quả sắp xếp
+        self.txtB_KetQua.text = " ".join(str(num) for num in sorted_numbers)
+
+    def txtB_Nhap_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        # Call the same function as clicking the button
+        self.btn_sapxep_click()
+
+    def txtB_KetQua_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        pass  # Since it's not needed to handle Enter key in the output box
